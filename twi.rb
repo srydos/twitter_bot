@@ -1,7 +1,7 @@
 require 'twitter'
 require 'pp'
 client = Twitter::REST::Client.new do | config |
-  file = File.open(".twitter_keys","r")
+  file = File.open(".twitter_keys.secret","r")
     lines = file.readlines
     config.consumer_key	= lines[0].chomp
     config.consumer_secret = lines[1].chomp
