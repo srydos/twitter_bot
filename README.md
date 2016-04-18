@@ -7,9 +7,5 @@ or
   input message! :<tweet messate>
 
 *** 
-Prepare '.twitter_keys.secret' file that about 
- "consumer_key"
- "consumer_secret_key"
- "access_token"
- "access_token_secret"
-at lines.
+Prepare before tweet '.twitter_keys.secret' file that's about 
+ "consumer_key", "consumer_secret_key", "access_token", "access_token_secret" at lines.
