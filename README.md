@@ -1,7 +1,7 @@
 # twitter
-tweet post script¥n
-ex:¥n
-  $ ruby twi.rb <tweet message>¥n
+tweet post script<br>
+ex:<br>
+  $ ruby twi.rb <tweet message><br>
 or¥n
   $ ruby twi.rb ¥n
   input message! :<tweet messate>¥n
