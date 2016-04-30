@@ -1,10 +1,10 @@
 # twitter
-tweet post script
-ex:
-  $ ruby twi.rb <tweet message>
-or
-  $ ruby twi.rb 
-  input message! :<tweet messate>
+tweet post script¥n
+ex:¥n
+  $ ruby twi.rb <tweet message>¥n
+or¥n
+  $ ruby twi.rb ¥n
+  input message! :<tweet messate>¥n
 
 *** 
 Prepare before tweet '.twitter_keys.secret' file that's about 
