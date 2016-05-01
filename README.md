@@ -5,8 +5,8 @@ ex:<br>
 or<br>
   $ ruby twi.rb <br>
   input message! :<tweet messate><br>
-
-Prepare before tweet 'user.yml' that written about user_account like this.<br>
+***
+Prepare config file before tweet 'user.yml' that written about user account like this.<br>
 ex:<br>
 consumer_key       : &ltyour consumer key&gt, <br>
 consumer_secret_key: &ltyour consumer secret key&gt,<br>
