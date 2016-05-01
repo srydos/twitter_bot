@@ -1,14 +1,14 @@
+WORK_DIR=ENV["ruby_twitter_work_dir"] + "/" || "/Users/srydos/ruby/twitter/"
 require 'twitter'
 require 'pp'
-client = Twitter::REST::Client.new do | config |
-  file = File.open(".twitter_keys.secret","r")
-    lines = file.readlines
-    config.consumer_key	= lines[0].chomp
-    config.consumer_secret = lines[1].chomp
-    config.access_token	= lines[2].chomp
-    config.access_token_secret	= lines[3].chomp
-  file.close
-end
+require 'yaml'
+key = YAML.load_file("./user.yml")
+client = Twitter::REST::Client.new(
+  consumer_key:        key["consumer_key"],
+  consumer_secret:     key["consumer_secret"],
+  access_token:        key["access_token"],
+  access_token_secret: key["access_token_secret"]
+)
 msg=ARGV[0] 
 if msg==nil then
   print "input massage! : "
