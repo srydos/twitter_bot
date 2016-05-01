@@ -6,6 +6,9 @@ or<br>
   $ ruby twi.rb <br>
   input message! :<tweet messate><br>
 
-*** 
-Prepare before tweet '.twitter_keys.secret' file that's about <br>
- "consumer_key", "consumer_secret_key", "access_token", "access_token_secret" at lines.<br>
+Prepare before tweet 'user.yml' that written about user_account like this.<br>
+ex:<br>
+consumer_key       : <your consumer key>, <br>
+consumer_secret_key: <your consumer secret key>,<br>
+access_token       : <your access_token>,<br>
+access_token_secret: <your access_token><br>
