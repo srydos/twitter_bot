@@ -10,7 +10,7 @@ def tweet_id2time(id)
     nil
   end
 end
-key = YAML.load_file("./user.yml")
+key = YAML.load_file(WORK_DIR + "/user.yml")
 client = Twitter::REST::Client.new(
   consumer_key:        key["consumer_key"],
   consumer_secret:     key["consumer_secret"],
@@ -18,6 +18,5 @@ client = Twitter::REST::Client.new(
   access_token_secret: key["access_token_secret"]
 )
 client.home_timeline.reverse.each do |tweet|
-   puts "\n	" + tweet.user.name + "/@" + tweet.user.screen_name + "/" + tweet_id2time(tweet.id).strftime("%Y-%m-%d %H:%M:%S.%L %Z") +
-   ":\n" + tweet.full_text
+   puts "\n	" + tweet_id2time(tweet.id).strftime("%Y-%m-%d %H:%M:%S.%L %Z") + " / " + tweet.user.name +  " / @" + tweet.user.screen_name + " :\n" + tweet.full_text
 end
