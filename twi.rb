@@ -2,7 +2,7 @@ WORK_DIR=ENV["ruby_twitter_work_dir"] + "/" || "/Users/srydos/ruby/twitter/"
 require 'twitter'
 require 'pp'
 require 'yaml'
-key = YAML.load_file("./user.yml")
+key = YAML.load_file(WORK_DIR + "./user.yml")
 client = Twitter::REST::Client.new(
   consumer_key:        key["consumer_key"],
   consumer_secret:     key["consumer_secret"],
