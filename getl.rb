@@ -2,6 +2,7 @@ WORK_DIR=ENV["ruby_twitter_work_dir"] + "/" || "/Users/srydos/ruby/twitter/"
 require 'twitter'
 require 'pp'
 require 'yaml'
+#ツイート時刻取得
 def tweet_id2time(id)
   case id
   when Integer
@@ -10,6 +11,7 @@ def tweet_id2time(id)
     nil
   end
 end
+#ツイートアカウント取得
 key = YAML.load_file(WORK_DIR + "./user.yml")
 client = Twitter::REST::Client.new(
   consumer_key:        key["consumer_key"],
@@ -17,7 +19,21 @@ client = Twitter::REST::Client.new(
   access_token:        key["access_token"],
   access_token_secret: key["access_token_secret"]
 )
-client.home_timeline.reverse.each do |tweet|
-   puts "\n	" + tweet.user.name + "/@" + tweet.user.screen_name + "/" + tweet_id2time(tweet.id).strftime("%Y-%m-%d %H:%M:%S.%L %Z") +
-   ":\n" + tweet.full_text
+#最後に取得したツイートid取得
+last_tweet_id = 0
+if File.exist? (WORK_DIR + ".last_tweet_id")
+  File.open(WORK_DIR + ".last_tweet_id","r") do |file|
+    file.each do |line|
+      last_tweet_id = "#{line.chomp}"
+    end
+  end
+else
+  File.open(WORK_DIR + ".last_tweet_id","w")
+end
+client.home_timeline({:since_id  => last_tweet_id}).reverse.each do |tweet|
+   puts "\n	#{tweet.user.name} /@#{tweet.user.screen_name} /#{tweet_id2time(tweet.id).strftime("%Y-%m-%d %H:%M:%S.%L %Z")} : ( #{tweet.id.to_s} )\n #{tweet.full_text}"
+   last_tweet_id = tweet.id.to_s
+end
+File.open(WORK_DIR + ".last_tweet_id","r+") do |file|
+  file.puts(last_tweet_id)
 end
