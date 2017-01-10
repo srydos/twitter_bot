@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 WORK_DIR=ENV["ruby_twitter_work_dir"] + "/" || "/Users/srydos/ruby/twitter/"
 require 'twitter'
 require 'yaml'
