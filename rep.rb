@@ -24,7 +24,8 @@ msg=ARGV[1]
 if msg==nil then
   print "input massage! : "
   msg=STDIN.gets
-  msg='@' + tweet_id.user + ' ' + msg
 end
+user = Twitter.status( tweet_id ).user
+msg="@#{user.screen_name} " + msg
 puts msg
-#client.update(msg,{:in_reply_to_status_id => tweet_id) 
+#client.update(msg,{:in_reply_to_status_id => tweet_id})
