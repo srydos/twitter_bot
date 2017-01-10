@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-WORK_DIR=ENV["ruby_twitter_work_dir"] + "/" || "/Users/srydos/ruby/twitter/"
+WORK_DIR=Dir.getwd
 require 'twitter'
 require 'pp'
 require 'yaml'
@@ -13,7 +13,7 @@ def tweet_id2time(id)
   end
 end
 #ツイートアカウント取得
-key = YAML.load_file(WORK_DIR + "./user.yml")
+key = YAML.load_file(WORK_DIR + "/user.yml")
 client = Twitter::REST::Client.new(
   consumer_key:        key["consumer_key"],
   consumer_secret:     key["consumer_secret"],
