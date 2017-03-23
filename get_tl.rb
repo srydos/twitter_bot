@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-WORK_DIR=Dir.getwd
+WORK_DIR=File.expand_path(__FILE__).sub(/[^\/]+$/,'')
 require 'twitter'
 require 'pp'
 require 'yaml'
@@ -45,7 +45,6 @@ when 0
   end
   timeline = client.home_timeline({:since_id => last_tweet_id})
   last_tweet_id = tweetPrintConsole(timeline, last_tweet_id)
-p last_tweet_id
   File.open(WORK_DIR + "/.last_tweet_id","r+") do |file|
     file.puts(last_tweet_id)
   end

@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-WORK_DIR=Dir.getwd
+WORK_DIR=File.expand_path(__FILE__).sub(/[^\/]+$/,'')
 require 'twitter'
 require 'yaml'
 key = YAML.load_file(WORK_DIR + "/user.yml")
