@@ -10,16 +10,9 @@ client = Twitter::REST::Client.new(
   access_token:        key["access_token"],
   access_token_secret: key["access_token_secret"]
 )
-msg = ''
 if ARGV[0] == nil or ARGV[0] == '' then
-  print "input massage! : "
-  msg=STDIN.gets
-else
-  #半角スペース対応
-  ARGV.each do | text |
-    msg += text + ' '
-  end
-  msg[/ $/]= ''
+  print "arg : (retweet_target_id)"
+  exit
 end
-puts msg
-client.update(msg)
+retweet_id = ARGV[0]
+client.retweet(retweet_id)

@@ -9,24 +9,44 @@ client = Twitter::REST::Client.new(
   access_token:        key["access_token"],
   access_token_secret: key["access_token_secret"]
 )
-#reply対象id
-tweet_id=ARGV[0].to_i
-if !tweet_id.is_a?(Integer) or tweet_id==0 then
-  puts 'reply対象のid不正'
+msg = ''
+if ARGV.length < 1 then
+  puts 'args:(reply target tweet_id)(text)'
   exit
 end
-if ARGV.length < 2 then
-  puts '引数足んないよ'
+
+#reply対象id
+tweet_id=ARGV[0].to_i
+if !tweet_id.is_a?(Integer) or tweet_id == 0 then
+  puts 'tweet_id invalid!'
   exit
 end
 
 #reply対象判定
-msg=ARGV[1]
-if msg==nil then
+reply_id = ARGV[0]
+begin
+  target_user = client.status( reply_id ).user
+rescue
+  puts 'reply_idが不正です'
+  exit
+end
+
+#replyIDだけが設定されていた場合は標準入力を受け取る
+if ARGV[1] == nil or ARGV[1] == '' then
   print "input massage! : "
   msg=STDIN.gets
+elsif ARGV.length > 2 then
+  #半角スペース対応
+  tweet_text = ARGV
+  tweet_text.shift.each do | text |
+    msg += text + ' '
+  end
+  msg[/ $/]= ''
+else 
+  msg = ARGV[1]
 end
-user = Twitter.status( tweet_id ).user
-msg="@#{user.screen_name} " + msg
+
+
+msg="@#{target_user.screen_name} " + msg
 puts msg
-#client.update(msg,{:in_reply_to_status_id => tweet_id})
+client.update(msg,{:in_reply_to_status_id => tweet_id})
