@@ -1,8 +1,6 @@
 #!/usr/bin/env ruby
 WORK_DIR=File.expand_path(__FILE__).sub(/[^\/]+$/,'')
-require 'twitter'
-require 'pp'
-require 'yaml'
+require WORK_DIR + 'TetesolTwitter.rb'
 #ツイートIDから時刻を計算して返す
 def tweetId2Time(tweet_id)
   case tweet_id
@@ -22,14 +20,8 @@ def tweetPrintConsole(timeline_arr, tweet_id)
   end
   last_tweet_id = @tweet_id
 end
-#ツイッターアカウント取得
-key = YAML.load_file(WORK_DIR + "/user.yml")
-client = Twitter::REST::Client.new(
-  consumer_key:        key["consumer_key"],
-  consumer_secret:     key["consumer_secret"],
-  access_token:        key["access_token"],
-  access_token_secret: key["access_token_secret"]
-)
+
+tweet_user = TetesolTwitter.new
 #最後に取得したツイートid取得
 last_tweet_id = "1"
 case ARGV.length
@@ -43,13 +35,13 @@ when 0
   else
     File.open(WORK_DIR + "/.last_tweet_id","w")
   end
-  timeline = client.home_timeline({:since_id => last_tweet_id})
-  last_tweet_id = tweetPrintConsole(timeline, last_tweet_id)
+  timeline = tweet_user.home_timeline( last_tweet_id )
+  last_tweet_id = tweetPrintConsole(timeline, last_tweet_id) #見え方悪いけど合理的　直す？
   File.open(WORK_DIR + "/.last_tweet_id","r+") do |file|
     file.puts(last_tweet_id)
   end
-when 2
 when 1
+when 2
 else
   puts "too many args!"
   exit

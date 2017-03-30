@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-WORK_DIR=File.expand_path(__FILE__).sub(/[^\/]+$/,'')
 require 'twitter'
 require 'yaml'
 class TetesolTwitter
@@ -24,30 +23,22 @@ class TetesolTwitter
     puts msg
     client.update( msg )
   end
-  #リプライを送る機能。リプライ対象を読み取って、@(userid) (text)の形でpostする
+  #リプライ機能。リプライ対象のidを読み取って、@(userid) (text)の形でpostする
   #target_tweet_id :リプライを送るツイートのid
   #text            :ツイートの内容
   def reply ( target_tweet_id = 0, text = '' )
-    #reply対象idをチェック
-    if !target_tweet_id.is_a?(Integer) or target_tweet_id == 0 then
-      puts 'target_tweet_id is invalid!'
-      #exit
-      return
-    end
     #リプライ対象のユーザを取得
     begin
       target_user = client.status( target_tweet_id ).user
     rescue
-      puts 'target_tweet_id is invalid!'
+      puts 'target_user was not found...'
       #exit
       return
     end
-    #テキストが空なら標準入力に対応する
-    if text == '' then
-      print 'input massage! : '
-      text = STDIN.gets
-    end
     msg = "@#{target_user.screen_name} " + text
     client.update(msg,{:in_reply_to_status_id => target_tweet_id})
+  end
+  def home_timeline( last_tweet_id )
+    client.home_timeline({ :since_id => last_tweet_id })
   end
 end
