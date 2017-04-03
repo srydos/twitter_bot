@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 WORK_DIR=File.expand_path(__FILE__).sub(/[^\/]+$/,'')
-require WORK_DIR + 'TetesolTwitter.rb'
+require WORK_DIR + 'class/TetesolTwitter.rb'
 #半角スペース対応
 tweet_user = TetesolTwitter.new
 msg = ''

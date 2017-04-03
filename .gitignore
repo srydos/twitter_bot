@@ -2,3 +2,4 @@
 *.yml
 .last_tweet_id
 *.swp
+config

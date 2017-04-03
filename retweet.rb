@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 WORK_DIR=File.expand_path(__FILE__).sub(/[^\/]+$/,'')
-require WORK_DIR + 'TetesolTwitter.rb'
+require WORK_DIR + 'class/TetesolTwitter.rb'
 retweet_user = TetesolTwitter.new
 if ARGV[0] == nil or ARGV[0] == '' then
   print "arg : (retweet_target_id)"

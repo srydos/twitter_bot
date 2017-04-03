@@ -3,13 +3,17 @@ require 'twitter'
 require 'yaml'
 class TetesolTwitter
   attr_accessor :client
-  def initialize
-    @key = YAML.load_file(WORK_DIR + '/user.yml')
+  def initialize( key_file_path:nil )
+    if key_file_path == nil then
+      @key_hash = YAML.load_file( WORK_DIR + './config/user.yml' )
+    else
+      @key_hash = YAML.load_file( key_file_path )
+    end
     @client = Twitter::REST::Client.new(
-      consumer_key:        @key['consumer_key'],
-      consumer_secret:     @key['consumer_secret'],
-      access_token:        @key['access_token'],
-      access_token_secret: @key['access_token_secret']
+      consumer_key:        @key_hash['consumer_key'],
+      consumer_secret:     @key_hash['consumer_secret'],
+      access_token:        @key_hash['access_token'],
+      access_token_secret: @key_hash['access_token_secret']
     )
   end
   #ツイートする機能
@@ -38,7 +42,12 @@ class TetesolTwitter
     msg = "@#{target_user.screen_name} " + text
     client.update(msg,{:in_reply_to_status_id => target_tweet_id})
   end
+  #ホームタイムラインを取得して生jsonのまま返す
   def home_timeline( last_tweet_id )
     client.home_timeline({ :since_id => last_tweet_id })
+  end
+  #mentionをgetする
+  def mention_timeline
+    client.mention_timeline
   end
 end
