@@ -49,7 +49,10 @@ class TetesolTwitter
     hash = client.local_trends ( locale_code )
   end
   def search( query = '', count = 15 )
-    timeline = client.search(query, :count => count, :result_type => "popular" )
+    timeline = client.search(query, :count => count )
+  end
+  def popular_search( query = '', count = 15 )
+    timeline = client.search(query, :count => 100, :result_type => "popular" )
   end
   #mentionをgetする
   def mention_timeline

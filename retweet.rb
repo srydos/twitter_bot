@@ -7,4 +7,9 @@ if ARGV[0] == nil or ARGV[0] == '' then
   exit
 end
 retweet_id = ARGV[0]
-retweet_user.retweet(retweet_id)
+begin
+  retweet_user.retweet(retweet_id)
+rescue
+  puts 'retweet error!'
+  exit
+end

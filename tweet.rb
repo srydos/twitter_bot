@@ -8,4 +8,9 @@ ARGV.each do | text |
   msg += text + ' '
 end
 msg[/ $/]= ''
-tweet_user.tweet(msg)
+begin
+  tweet_user.tweet(msg)
+rescue
+  puts 'tweet error!'
+  exit
+end
