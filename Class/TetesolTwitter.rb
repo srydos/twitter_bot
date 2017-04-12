@@ -58,4 +58,35 @@ class TetesolTwitter
   def mention_timeline
     client.mention_timeline
   end
+  #####
+  # 関連メソッド
+  #####
+  #ツイートIDから時刻を計算して返す
+  def tweetId2Time(tweet_id)
+    case tweet_id
+    when Integer
+      Time.at(((tweet_id >> 22) + 1288834974657) / 1000.0)
+    else
+      nil
+    end
+  end
+  #timelineのtweet_id以降のタイムラインをコンソールに表示して、最後のtweet_idを返す
+  def tweetPrintConsole(timeline_arr, tweet_id)
+    @tweet_id = tweet_id
+    timeline_arr.reverse.each do |tweet|
+       #タイムラインを表示
+       puts "	#{tweet.user.name} /@#{tweet.user.screen_name} /#{tweetId2Time(tweet.id).strftime("%Y-%m-%d %H:%M:%S.%L %Z")} : ( #{tweet.id.to_s} )❤️ :#{tweet.favorite_count} 🔁 :#{tweet.retweet_count}\n #{tweet.full_text}\n"
+       @tweet_id = tweet.id.to_s
+    end
+    last_tweet_id = @tweet_id
+  end
+  #YAMLに吐き出す機能？
+  def tweetPrintYAML(timeline_hash, export_dir="./")
+    timeline_hash.each do |tweet|
+      #タイムラインを表示
+      open(export_dir + "popular_tweet.yml","a+") do |e|
+        YAML.dump( timeline_hash, e )
+      end
+    end
+  end
 end

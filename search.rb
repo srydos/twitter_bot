@@ -1,29 +1,6 @@
 #!/usr/bin/env ruby
 WORK_DIR=File.expand_path(__FILE__).sub(/[^\/]+$/,'')
 require WORK_DIR + './class/TetesolTwitter.rb'
-#ツイートIDから時刻を計算して返す
-def tweetId2Time(tweet_id)
-  case tweet_id
-  when Integer
-    Time.at(((tweet_id >> 22) + 1288834974657) / 1000.0)
-  else
-    nil
-  end end
-#timelineのtweet_id以降のタイムラインをコンソールに表示して、最後のtweet_idを返す
-def tweetPrintConsole(timeline_arr)
-  timeline_arr.each do |tweet|
-     #タイムラインを表示
-     puts "	#{tweet.user.name} /@#{tweet.user.screen_name} /#{tweetId2Time(tweet.id).strftime("%Y-%m-%d %H:%M:%S.%L %Z")} : ( #{tweet.id.to_s} ) ❤️ :#{tweet.favorite_count} 🔁 :#{tweet.retweet_count}\n #{tweet.full_text}\n"
-  end
-end
-def tweetPrintYAML(timeline_hash)
-  timeline_hash.each do |tweet|
-    #タイムラインを表示
-    open("./popular_tweet.yml","a+") do |e|
-      YAML.dump( timeline_hash, e )
-    end
-  end
-end
 
 search_user = TetesolTwitter.new
 #最後に取得したツイートid取得
@@ -40,7 +17,7 @@ when 1
   rescue
     puts 'search request error...?'
   end
-  tweetPrintConsole( timeline )
+  search_user.tweetPrintConsole( timeline )
   exit
 else
   msg = ''
@@ -58,7 +35,7 @@ else
   rescue
     puts 'search request error...?'
   end
-  tweetPrintConsole( timeline )
+  search_user.tweetPrintConsole( timeline )
 exit
-  tweetPrintYAML( timeline.to_h )
+  search_user.tweetPrintYAML( timeline.to_h )
 end
