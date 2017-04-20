@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 WORK_DIR=File.expand_path(__FILE__).sub(/[^\/]+$/,'')
-require WORK_DIR + './class/TetesolTwitter.rb'
+require WORK_DIR + './Class/TetesolTwitter.rb'
 tweet_user = TetesolTwitter.new
 #最後に取得したツイートid取得
 last_tweet_id = "1"
