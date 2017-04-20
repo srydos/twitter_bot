@@ -39,6 +39,7 @@ class TetesolTwitter
       return
     end
     msg = "@#{target_user.screen_name} " + text
+    puts msg
     client.update(msg,{:in_reply_to_status_id => target_tweet_id})
   end
   #ホームタイムラインを取得して生jsonのまま返す
