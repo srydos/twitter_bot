@@ -76,7 +76,7 @@ class TetesolTwitter
     @tweet_id = tweet_id
     timeline_arr.reverse.each do |tweet|
        #タイムラインを表示
-       puts "	#{tweet.user.name} /@#{tweet.user.screen_name} /#{tweetId2Time(tweet.id).strftime("%Y-%m-%d %H:%M:%S.%L %Z")} : ( #{tweet.id.to_s} )❤️ :#{tweet.favorite_count} 🔁 :#{tweet.retweet_count}\n #{tweet.full_text}\n"
+       puts "	#{tweet.user.name} /@#{tweet.user.screen_name} /#{tweetId2Time(tweet.id).strftime("%Y-%m-%d %H:%M:%S.%L %Z")} : ( #{tweet.id.to_s} )❤️v:#{tweet.favorite_count} 🔁G:#{tweet.retweet_count}\n #{tweet.full_text}\n"
        @tweet_id = tweet.id.to_s
     end
     last_tweet_id = @tweet_id
