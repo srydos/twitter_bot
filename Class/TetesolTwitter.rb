@@ -3,18 +3,19 @@ require 'twitter'
 require 'yaml'
 class TetesolTwitter
   attr_accessor :client
-  def initialize( key_file_path:nil )
-    if key_file_path == nil then
-      @key_hash = YAML.load_file( WORK_DIR + './config/user.yml' )
-    else
+  def initialize( key_file_path = "" )
+    if not key_file_path.empty? then
       @key_hash = YAML.load_file( key_file_path )
+      @client = Twitter::REST::Client.new(
+        consumer_key:        @key_hash['consumer_key'],
+        consumer_secret:     @key_hash['consumer_secret'],
+        access_token:        @key_hash['access_token'],
+        access_token_secret: @key_hash['access_token_secret']
+      )
+    else
+      puts 'cannot read key_file_path...'
+      exit
     end
-    @client = Twitter::REST::Client.new(
-      consumer_key:        @key_hash['consumer_key'],
-      consumer_secret:     @key_hash['consumer_secret'],
-      access_token:        @key_hash['access_token'],
-      access_token_secret: @key_hash['access_token_secret']
-    )
   end
   #ツイートする機能
   #text :ツイートの内容
@@ -39,6 +40,7 @@ class TetesolTwitter
       return
     end
     msg = "@#{target_user.screen_name} " + text
+#    msg = text #replyに@いらなくなる日が来る
     puts msg
     client.update(msg,{:in_reply_to_status_id => target_tweet_id})
   end

@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 WORK_DIR=File.expand_path(__FILE__).sub(/[^\/]+$/,'')
 require WORK_DIR + 'Class/TetesolTwitter.rb'
-tweet_user = TetesolTwitter.new
+tweet_user = TetesolTwitter.new('./Config/user.yml')
 msg = ''
 #reply対象idのバリデーション
 target_tweet_id = ARGV[0].to_i

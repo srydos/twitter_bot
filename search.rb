@@ -2,7 +2,11 @@
 WORK_DIR=File.expand_path(__FILE__).sub(/[^\/]+$/,'')
 require WORK_DIR + './Class/TetesolTwitter.rb'
 
-search_user = TetesolTwitter.new
+search_user = TetesolTwitter.new('./Config/user.yml')
+if (search_user == nil ) then 
+  puts 'user.yml is not found...'
+  exit
+end
 #最後に取得したツイートid取得
 args = ARGV
 case args.length
