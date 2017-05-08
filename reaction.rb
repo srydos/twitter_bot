@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 WORK_DIR=File.expand_path(__FILE__).sub(/[^\/]+$/,'')
 require WORK_DIR + 'Class/TetesolTwitter.rb'
-twitter_user = TetesolTwitter.new('./config/user.yml')
+twitter_user = TetesolTwitter.new('./Config/user.yml')
 args = ARGV
 if args.length > 2 then
   puts 'too many args...'
