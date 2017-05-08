@@ -6,6 +6,7 @@ tweet_user = TetesolTwitter.new('./Config/user.yml')
 #最後に取得したツイートid取得
 last_tweet_id = "1"
 args = ARGV
+#func_name
 if args.find {|v| v == "-a"} then printall = true end
 case args.length
 when 0..1

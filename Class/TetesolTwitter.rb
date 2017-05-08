@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 require 'twitter'
 require 'yaml'
+require 'pp'
 class TetesolTwitter
   attr_accessor :client
   def initialize( key_file_path = "" )
@@ -61,6 +62,30 @@ class TetesolTwitter
   def mention_timeline
     client.mention_timeline
   end
+  #tweet_idに対してのreaction
+  def retweet(id)
+    client.retweet(id)
+  end
+  def favorite(id)
+    client.favorite(id)
+  end
+  def favorite_delete(id)
+    client.favorite_delete(id)
+  end
+  def status(id) #発言の詳細をゲットする
+    tweet = client.status(id)
+    puts "	#{tweet.user.name} /@#{tweet.user.screen_name} /#{tweetId2Time(tweet.id).strftime("%Y-%m-%d %H:%M:%S.%L %Z")} : ( #{tweet.id.to_s} )❤️ :#{tweet.favorite_count} 🔁 :#{tweet.retweet_count}\n #{tweet.full_text}\n"
+pp tweet.user_mentions.class
+tweet.user_mentions.each do |item|
+  pp item
+  pp item.class
+  pp item.to_s
+end
+    tweetPrintConsole(tweet.user_mentions, 1)
+  end
+  def status_destroy(id) #発言削除
+    client.status_destroy(id)
+  end
   #####
   # 関連メソッド
   #####
@@ -78,7 +103,7 @@ class TetesolTwitter
     @tweet_id = tweet_id
     timeline_arr.reverse.each do |tweet|
        #タイムラインを表示
-       puts "	#{tweet.user.name} /@#{tweet.user.screen_name} /#{tweetId2Time(tweet.id).strftime("%Y-%m-%d %H:%M:%S.%L %Z")} : ( #{tweet.id.to_s} )❤️v:#{tweet.favorite_count} 🔁G:#{tweet.retweet_count}\n #{tweet.full_text}\n"
+       puts "	#{tweet.user.name} /@#{tweet.user.screen_name} /#{tweetId2Time(tweet.id).strftime("%Y-%m-%d %H:%M:%S.%L %Z")} : ( #{tweet.id.to_s} )❤️ :#{tweet.favorite_count} 🔁 :#{tweet.retweet_count}\n #{tweet.full_text}\n"
        @tweet_id = tweet.id.to_s
     end
     last_tweet_id = @tweet_id
