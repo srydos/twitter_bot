@@ -58,9 +58,13 @@ class TetesolTwitter
   def popular_search( query = '', count = 15 )
     timeline = client.search(query, :count => 100, :result_type => "popular" )
   end
-  #mentionをgetする
-  def mention_timeline
-    client.mention_timeline
+  #自分のTL
+  def my_timeline
+    client.user_timeline( client.user.id )
+  end
+  #mention
+  def mentions_timeline
+    client.mentions_timeline
   end
   #tweet_idに対してのreaction
   def retweet(id)
