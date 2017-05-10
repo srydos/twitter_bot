@@ -13,12 +13,11 @@ func_name = "me"      if args.delete("-m") or args.delete("-me")
 func_name = "mention" if args.delete("-@") or args.delete("-mention")
 if args.delete("-u") or args.delete("-user") then
   func_name = "user"
-  user      = args
-p user
+  user_arr  = args
 end
 #引数判断
 case args.length
-when 0..2
+when 0..10
   case func_name
   when "all"
     timeline = twitter_user.home_timeline( last_tweet_id )
@@ -30,8 +29,15 @@ when 0..2
     timeline = twitter_user.my_timeline
     twitter_user.tweetPrintConsole(timeline, last_tweet_id)
   when "user"
-    #timeline = twitter_user.user_timeline( user )
-    #twitter_user.tweetPrintConsole(timeline, last_tweet_id)
+    len = user_arr.length 
+    user_arr.each do |user|
+      if not len = 0..1 then
+        puts 'press Enter...print TL user is ' + user
+        STDIN.gets
+      end
+      timeline = twitter_user.user_timeline(user_arr)
+      twitter_user.tweetPrintConsole(timeline, last_tweet_id)
+    end
   else
     if File.exist? (WORK_DIR + "/Config/.last_tweet_id")
       File.open(WORK_DIR + "/Config/.last_tweet_id","r") do |file|

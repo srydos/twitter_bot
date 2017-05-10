@@ -60,10 +60,14 @@ class TetesolTwitter
   end
   #自分のTL
   def my_timeline
-    client.user_timeline( client.user.id )
+    client.user_timeline( client.user.id, options ={} )
+  end
+  #誰かのTL
+  def user_timeline(user_id, options = {})
+    client.user_timeline( user_id )
   end
   #mention
-  def mentions_timeline
+  def mentions_timeline 
     client.mentions_timeline
   end
   #tweet_idに対してのreaction
@@ -80,11 +84,11 @@ class TetesolTwitter
     tweet = client.status(id)
     puts "	#{tweet.user.name} /@#{tweet.user.screen_name} /#{tweetId2Time(tweet.id).strftime("%Y-%m-%d %H:%M:%S.%L %Z")} : ( #{tweet.id.to_s} )❤️ :#{tweet.favorite_count} 🔁 :#{tweet.retweet_count}\n #{tweet.full_text}\n"
 pp tweet.user_mentions.class
-tweet.user_mentions.each do |item|
-  pp item
-  pp item.class
-  pp item.to_s
-end
+    tweet.user_mentions.each do |item|
+      pp item
+      pp item.class
+      pp item.to_s
+    end
     tweetPrintConsole(tweet.user_mentions, 1)
   end
   def status_destroy(id) #発言削除
