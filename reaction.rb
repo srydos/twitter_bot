@@ -27,7 +27,7 @@ puts "\"" + func_name + "\" doing..."
   when "favorite"
     twitter_user.favorite(target_tweet_id)
   when "delete"
-    twitter_user.status_destroy(target_tweet_id)
+    twitter_user.destroy_status(target_tweet_id)
   when "status"
     twitter_user.status(target_tweet_id)
   else

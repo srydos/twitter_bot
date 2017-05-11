@@ -91,8 +91,8 @@ pp tweet.user_mentions.class
     end
     tweetPrintConsole(tweet.user_mentions, 1)
   end
-  def status_destroy(id) #発言削除
-    client.status_destroy(id)
+  def destroy_status(id) #発言削除
+    client.destroy_status(id)
   end
   #####
   # 関連メソッド
