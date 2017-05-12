@@ -20,7 +20,7 @@ func_name = "favorite" if args.delete("-f") or args.delete("-favorite")
 func_name = "status"   if args.delete("-s") or args.delete("-status"  )
 target_tweet_id = args[0]
 puts "\"" + func_name + "\" doing..."
-#begin
+begin
   case func_name 
   when "retweet"
     twitter_user.retweet(target_tweet_id)
@@ -33,7 +33,8 @@ puts "\"" + func_name + "\" doing..."
   else
     puts "hmm... what method?"
   end
-#rescue
-#  puts 'reaction error!'
+rescue
+  puts 'reaction error!'
   exit
-#end
+end
+puts 'done!'
