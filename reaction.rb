@@ -41,3 +41,4 @@ rescue
   puts 'reaction error!'
   exit
 end
+puts 'done!'
