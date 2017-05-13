@@ -4,28 +4,32 @@ require WORK_DIR + 'Class/TetesolTwitter.rb'
 #require WORK_DIR + 'reply.rb'
 #require WORK_DIR + 'get_tl.rb'
 tweet_user   = TetesolTwitter.new(WORK_DIR + 'Config/user.yml')
-monitored_tl = tweet_user.mentions_timeline
-monitored_tl.each do |tweet|
-last_tweet_id = 1
-  if File.exist? (WORK_DIR + "/Config/.last_tweet_id")
-    File.open(WORK_DIR + "/Config/.last_tweet_id","r") do |file|
-      file.each do |line|
-        last_tweet_id = "#{line.chomp}"
-      end
+last_reply_id = 1
+if File.exist? (WORK_DIR + "/Config/.last_reply_id")
+  File.open(WORK_DIR + "/Config/.last_reply_id","r") do |file|
+    file.each do |line|
+      last_reply_id = "#{line.chomp}".to_i
     end
-    File.open(WORK_DIR + "/Config/.last_tweet_id","w")
   end
+  File.open(WORK_DIR + "/Config/.last_reply_id","w")
+end
+pp "last is #{last_reply_id}"
+monitored_tl = tweet_user.mentions_timeline_bot(last_reply_id.to_i)
+monitored_tl.each do |tweet|
   @text = tweet.full_text
-  if @text.match("うんこ") then
+  if @text.match("うんこ") or @text.match("クソ") then
     @str=""
     #内容重複よけ　それでも被ったら流さないでいい
     rand(15).times{ @str += "…"}
     #なぜ人は排便時に水を流すのか
-    #last_tweet_id = tweet_user.reply(tweet.id ,"ジャーッ" + @str).id
+    #last_reply_id = tweet_user.reply(tweet.id ,"ジャーッ" + @str).id
+puts 'reaction!'
+pp tweet.id
+    last_reply_id = tweet.id
   end
-  if File.exist? (WORK_DIR + "/Config/.last_tweet_id")
-    File.open(WORK_DIR + "/Config/.last_tweet_id","r+") do |file|
-      file.puts(last_tweet_id)
-    end
+end
+if File.exist? (WORK_DIR + "/Config/.last_reply_id")
+  File.open(WORK_DIR + "/Config/.last_reply_id","r+") do |file|
+    file.puts(last_reply_id)
   end
 end
