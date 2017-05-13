@@ -1,0 +1,21 @@
+2017/05/14 04:37:01:/home/srydos/.rbenv/versions/2.2.2/lib/ruby/2.2.0/psych.rb:464:in `initialize': No such file or directory @ rb_sysopen - /home/srydos/ruby/bot/Config/user.yml (Errno::ENOENT)
+	from /home/srydos/.rbenv/versions/2.2.2/lib/ruby/2.2.0/psych.rb:464:in `open'
+	from /home/srydos/.rbenv/versions/2.2.2/lib/ruby/2.2.0/psych.rb:464:in `load_file'
+	from /home/srydos/ruby/bot/Class/TetesolTwitter.rb:9:in `initialize'
+	from bot_reply.rb:6:in `new'
+	from bot_reply.rb:6:in `<main>'
+2017/05/14 04:38:06:/home/srydos/.rbenv/versions/2.2.2/lib/ruby/2.2.0/psych.rb:464:in `initialize': No such file or directory @ rb_sysopen - /home/srydos/ruby/bot/Config/user.yml (Errno::ENOENT)
+	from /home/srydos/.rbenv/versions/2.2.2/lib/ruby/2.2.0/psych.rb:464:in `open'
+	from /home/srydos/.rbenv/versions/2.2.2/lib/ruby/2.2.0/psych.rb:464:in `load_file'
+	from /home/srydos/ruby/bot/Class/TetesolTwitter.rb:9:in `initialize'
+	from bot_reply.rb:6:in `new'
+	from bot_reply.rb:6:in `<main>'
+2017/05/14 04:39:52:2017/05/14 04:42:01:\n
+2017/05/14 04:47:02:bot_reply.rb:28:in `block (2 levels) in <main>': undefined local variable or method `last_replyed_id' for main:Object (NameError)
+	from bot_reply.rb:27:in `open'
+	from bot_reply.rb:27:in `block in <main>'
+	from bot_reply.rb:8:in `each'
+	from bot_reply.rb:8:in `<main>'
+\n
+2017/05/14 04:52:01:\n
+2017/05/14 04:57:01:\n

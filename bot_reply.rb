@@ -6,13 +6,14 @@ require WORK_DIR + 'Class/TetesolTwitter.rb'
 tweet_user   = TetesolTwitter.new(WORK_DIR + 'Config/user.yml')
 monitored_tl = tweet_user.mentions_timeline
 monitored_tl.each do |tweet|
-  if File.exist? (WORK_DIR + "/Config/.last_replyed_id")
-    File.open(WORK_DIR + "/Config/.last_replyed_id","r") do |file|
+last_tweet_id = 1
+  if File.exist? (WORK_DIR + "/Config/.last_tweet_id")
+    File.open(WORK_DIR + "/Config/.last_tweet_id","r") do |file|
       file.each do |line|
-        last_replyed_id = "#{line.chomp}"
+        last_tweet_id = "#{line.chomp}"
       end
     end
-    File.open(WORK_DIR + "/Config/.last_replyed_id","w")
+    File.open(WORK_DIR + "/Config/.last_tweet_id","w")
   end
   @text = tweet.full_text
   if @text.match("うんこ") then
@@ -20,11 +21,11 @@ monitored_tl.each do |tweet|
     #内容重複よけ　それでも被ったら流さないでいい
     rand(15).times{ @str += "…"}
     #なぜ人は排便時に水を流すのか
-    last_replyed_id = tweet_user.reply(tweet.id ,"ジャーッ" + @str)
+    #last_tweet_id = tweet_user.reply(tweet.id ,"ジャーッ" + @str).id
   end
-  if File.exist? (WORK_DIR + "/Config/.last_replyed_id")
-    File.open(WORK_DIR + "/Config/.last_replyed_id","r+") do |file|
-      file.puts(last_replyed_id)
+  if File.exist? (WORK_DIR + "/Config/.last_tweet_id")
+    File.open(WORK_DIR + "/Config/.last_tweet_id","r+") do |file|
+      file.puts(last_tweet_id)
     end
   end
 end
