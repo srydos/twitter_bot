@@ -77,19 +77,24 @@ class TetesolTwitter
   def favorite(id)
     client.favorite(id)
   end
-  def favorite_delete(id)
-    client.favorite_delete(id)
+  def unfavorite(id)
+    client.unfavorite(id)
   end
   def status(id) #発言の詳細をゲットする
-    tweet = client.status(id)
-    puts "	#{tweet.user.name} /@#{tweet.user.screen_name} /#{tweetId2Time(tweet.id).strftime("%Y-%m-%d %H:%M:%S.%L %Z")} : ( #{tweet.id.to_s} )❤️ :#{tweet.favorite_count} 🔁 :#{tweet.retweet_count}\n #{tweet.full_text}\n"
-pp tweet.user_mentions.class
-    tweet.user_mentions.each do |item|
-      pp item
-      pp item.class
-      pp item.to_s
+    @target = client.status(id)
+    tweetPrintConsole(@target)
+    @reactions = @target.user_mentions
+    if @reactions.empty? then
+      puts "*** reply none ***"
+      return
     end
-    tweetPrintConsole(tweet.user_mentions, 1)
+    @reactions.each do |item|
+pp item
+pp item.class
+pp item.to_s
+    end
+    tweetsPrintConsole(@reactions, 1)
+    tweetsPrintConsole(tweet.user_mentions, 1)
   end
   def destroy_status(id) #発言削除
     client.destroy_status(id)
@@ -107,14 +112,18 @@ pp tweet.user_mentions.class
     end
   end
   #timelineのtweet_id以降のタイムラインをコンソールに表示して、最後のtweet_idを返す
-  def tweetPrintConsole(timeline_arr, tweet_id)
+  def tweetsPrintConsole(timeline_arr, tweet_id)
     @tweet_id = tweet_id
     timeline_arr.reverse.each do |tweet|
-       #タイムラインを表示
-       puts "	#{tweet.user.name} /@#{tweet.user.screen_name} /#{tweetId2Time(tweet.id).strftime("%Y-%m-%d %H:%M:%S.%L %Z")} : ( #{tweet.id.to_s} )❤️ :#{tweet.favorite_count} 🔁 :#{tweet.retweet_count}\n #{tweet.full_text}\n"
-       @tweet_id = tweet.id.to_s
+      tweetPrintConsole(tweet)
+      @tweet_id = tweet.id.to_s
     end
     last_tweet_id = @tweet_id
+  end
+  def tweetPrintConsole(tweet_entity)
+       #タイムラインを表示
+      puts "	#{tweet_entity.user.name} /@#{tweet_entity.user.screen_name} /#{tweetId2Time(tweet_entity.id).strftime("%Y-%m-%d %H:%M:%S.%L %Z")} : ( #{tweet_entity.id.to_s} ) fv:#{tweet_entity.favorite_count} rt:#{tweet_entity.retweet_count}\n #{tweet_entity.full_text}\n"
+      tweet_id = tweet_entity.id
   end
   #YAMLに吐き出す機能？
   def tweetPrintYAML(timeline_hash, export_dir="./")

@@ -21,13 +21,13 @@ when 0..10
   case func_name
   when "all"
     timeline = twitter_user.home_timeline( last_tweet_id )
-    twitter_user.tweetPrintConsole(timeline, last_tweet_id)
+    twitter_user.tweetsPrintConsole(timeline, last_tweet_id)
   when "mention"
     timeline = twitter_user.mentions_timeline
-    twitter_user.tweetPrintConsole(timeline, last_tweet_id)
+    twitter_user.tweetsPrintConsole(timeline, last_tweet_id)
   when "me"
     timeline = twitter_user.my_timeline
-    twitter_user.tweetPrintConsole(timeline, last_tweet_id)
+    twitter_user.tweetsPrintConsole(timeline, last_tweet_id)
   when "user"
     len = user_arr.length 
     user_arr.each do |user|
@@ -36,7 +36,7 @@ when 0..10
         STDIN.gets
       end
       timeline = twitter_user.user_timeline(user_arr)
-      twitter_user.tweetPrintConsole(timeline, last_tweet_id)
+      twitter_user.tweetsPrintConsole(timeline, last_tweet_id)
     end
   else
     if File.exist? (WORK_DIR + "/Config/.last_tweet_id")
@@ -49,7 +49,7 @@ when 0..10
       File.open(WORK_DIR + "/Config/.last_tweet_id","w")
     end
     timeline = twitter_user.home_timeline( last_tweet_id )
-    last_tweet_id = twitter_user.tweetPrintConsole(timeline, last_tweet_id) #見え方悪いけど合理的　直す？
+    last_tweet_id = twitter_user.tweetsPrintConsole(timeline, last_tweet_id) #見え方悪いけど合理的　直す？
     File.open(WORK_DIR + "/Config/.last_tweet_id","r+") do |file|
       file.puts(last_tweet_id)
     end
