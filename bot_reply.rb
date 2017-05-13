@@ -13,7 +13,7 @@ if File.exist? (WORK_DIR + "Config/.last_reply_id")
   end
   File.open(WORK_DIR + "Config/.last_reply_id","w")
 end
-monitored_tl = tweet_user.mentions_timeline_bot(last_reply_id.to_i + 1)
+monitored_tl = tweet_user.mentions_timeline_bot(last_reply_id.to_i)
 monitored_tl.reverse.each do |tweet|
   @text = tweet.full_text
   if @text.match("うんこ") or @text.match("クソ") then
