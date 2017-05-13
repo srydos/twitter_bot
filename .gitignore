@@ -4,3 +4,4 @@
 *.swp
 Config/*
 .last_replyed_id
+err.log
