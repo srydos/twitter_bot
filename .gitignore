@@ -1,0 +1,5 @@
+*.secret
+*.yml
+.last_tweet_id
+*.swp
+Config/*
