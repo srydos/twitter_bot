@@ -3,3 +3,4 @@
 .last_tweet_id
 *.swp
 Config/*
+.last_replyed_id
