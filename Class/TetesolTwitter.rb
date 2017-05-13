@@ -70,6 +70,10 @@ class TetesolTwitter
   def mentions_timeline 
     client.mentions_timeline
   end
+  #mention
+  def mentions_timeline_bot(last_id) 
+    client.mentions_timeline( {:since_id => last_id} )
+  end
   #tweet_idに対してのreaction
   def retweet(id)
     client.retweet(id)
