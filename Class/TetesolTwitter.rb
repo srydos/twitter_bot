@@ -87,7 +87,7 @@ class TetesolTwitter
   end
   def status(id) #発言の詳細をゲットする
     @target = client.status(id)
-    tweetPrintConsole(@target)
+    tweet_print_console(@target)
     @reactions = @target.user_mentions
     if @reactions.empty? then
       puts "*** reply none ***"
@@ -98,8 +98,8 @@ pp item
 pp item.class
 p item
     end
-    tweetsPrintConsole(@reactions, 1)
-    tweetsPrintConsole(tweet.user_mentions, 1)
+    tweets_print_console(@reactions, 1)
+    tweets_print_console(tweet.user_mentions, 1)
   end
   def destroy_status(id) #発言削除
     client.destroy_status(id)
@@ -108,7 +108,7 @@ p item
   # 関連メソッド
   #####
   #ツイートIDから時刻を計算して返す
-  def tweetId2Time(tweet_id)
+  def tweet_id_to_time(tweet_id)
     case tweet_id
     when Integer
       Time.at(((tweet_id >> 22) + 1288834974657) / 1000.0)
@@ -117,21 +117,21 @@ p item
     end
   end
   #timelineのtweet_id以降のタイムラインをコンソールに表示して、最後のtweet_idを返す
-  def tweetsPrintConsole(timeline_arr, tweet_id)
+  def tweets_print_console(timeline_arr, tweet_id)
     @tweet_id = tweet_id
     timeline_arr.reverse.each do |tweet|
-      tweetPrintConsole(tweet)
+      tweet_print_console(tweet)
       @tweet_id = tweet.id.to_s
     end
     last_tweet_id = @tweet_id
   end
-  def tweetPrintConsole(tweet_entity)
+  def tweet_print_console(tweet_entity)
        #タイムラインを表示
-      puts "	#{tweet_entity.user.name} /@#{tweet_entity.user.screen_name} /#{tweetId2Time(tweet_entity.id).strftime("%Y-%m-%d %H:%M:%S.%L %Z")} : ( #{tweet_entity.id.to_s} ) fv:#{tweet_entity.favorite_count} rt:#{tweet_entity.retweet_count}\n #{tweet_entity.full_text}\n"
+      puts "	#{tweet_entity.user.name} /@#{tweet_entity.user.screen_name} /#{tweet_id_to_time(tweet_entity.id).strftime("%Y-%m-%d %H:%M:%S.%L %Z")} : ( #{tweet_entity.id.to_s} ) fv:#{tweet_entity.favorite_count} rt:#{tweet_entity.retweet_count}\n #{tweet_entity.full_text}\n"
       tweet_id = tweet_entity.id
   end
   #YAMLに吐き出す機能？
-  def tweetPrintYAML(timeline_hash, export_dir="./")
+  def tweet_print_yaml(timeline_hash, export_dir="./")
     timeline_hash.each do |tweet|
       #タイムラインを表示
       open(export_dir + "popular_tweet.yml","a+") do |e|
