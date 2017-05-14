@@ -139,4 +139,25 @@ p item
       end
     end
   end
+  #読み込んだファイルの最終行だけを返す
+  def read_or_make_text_file(file_path)
+    text = ""
+    if File.exist? (file_path)
+      File.open(file_path,"r") do |file|
+        file.each do |line|
+          text = "#{line.chomp}"
+        end
+      end
+    else
+      File.open(file_path,"w")
+      File.print(text)
+    end
+    text
+  end
+  #渡されたtextをファイルに書き込む
+  def write_text_to_file(file_path, text)
+    File.open(file_path,"r+") do |file|
+      file.puts(text)
+    end
+  end
 end
