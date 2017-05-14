@@ -18,15 +18,12 @@ puts  @request_token.authorize_url
 #urlにアクセスしてから
 print "input PIN : "
 pin = STDIN.gets
-#@access_token = @request_token.get_access_token(:oauth_verifier => pin)
-p pin
+@access_token = @request_token.get_access_token(:oauth_verifier => pin)
 key_hash = { 
   'consumer_key'=>		@consumer_key,
   'consumer_secret'=>		@consumer_secret,
-#  'access_token'=>		@access_token.token,
-#  'access_token_secret'=>	@access_token.secret
-  'access_token'=>		"token",
-  'access_token_secret'=>	"secret"
+  'access_token'=>		@access_token.token,
+  'access_token_secret'=>	@access_token.secret
 }
 open("./user.yml","w+") do |e|
   YAML.dump(key_hash,e)
