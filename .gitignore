@@ -4,4 +4,5 @@
 .last_tweet_id
 *.swp
 Config/*
+!Config
 err.log
