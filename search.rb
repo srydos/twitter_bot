@@ -21,7 +21,7 @@ when 1
   rescue
     puts 'search request error...?'
   end
-  search_user.tweetPrintConsole( timeline )
+  search_user.tweet_print_console( timeline )
   exit
 else
   msg = ''
@@ -39,7 +39,7 @@ else
   rescue
     puts 'search request error...?'
   end
-  search_user.tweetPrintConsole( timeline )
+  search_user.tweet_print_console( timeline )
 exit
-  search_user.tweetPrintYAML( timeline.to_h )
+  search_user.tweet_print_yaml( timeline.to_h )
 end
