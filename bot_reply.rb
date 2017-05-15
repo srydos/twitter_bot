@@ -5,14 +5,7 @@ require WORK_DIR + 'Class/TetesolTwitter.rb'
 #require WORK_DIR + 'get_tl.rb'
 tweet_user   = TetesolTwitter.new(WORK_DIR + 'Config/user.yml')
 last_reply_id = 1
-if File.exist? (WORK_DIR + "Config/.last_reply_id")
-  File.open(WORK_DIR + "Config/.last_reply_id","r") do |file|
-    file.each do |line|
-      last_reply_id = "#{line.chomp}".to_i
-    end
-  end
-  File.open(WORK_DIR + "Config/.last_reply_id","w")
-end
+read_or_make_text_file(WORK_DIR + "Config/.last_reply_id")
 monitored_tl = tweet_user.mentions_timeline_bot(last_reply_id.to_i)
 monitored_tl.reverse.each do |tweet|
   @text = tweet.full_text
@@ -25,8 +18,4 @@ monitored_tl.reverse.each do |tweet|
     last_reply_id = tweet.id
   end
 end
-if File.exist? (WORK_DIR + "Config/.last_reply_id")
-  File.open(WORK_DIR + "Config/.last_reply_id","r+") do |file|
-    file.puts(last_reply_id)
-  end
-end
+write_text_to_file(WORK_DIR + "Config/.last_reply_id", last_reply_id)

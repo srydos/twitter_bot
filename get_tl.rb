@@ -16,9 +16,10 @@ end
 #引数判断
 case args.length
 when 0..10
+  last_tweet_id = "1"
   case func_name
   when "all"
-    timeline = twitter_user.home_timeline( last_tweet_id )
+    timeline = twitter_user.home_timeline(last_tweet_id)
     twitter_user.tweets_print_console(timeline, last_tweet_id)
   when "mention"
     timeline = twitter_user.mentions_timeline

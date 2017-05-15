@@ -1,7 +1,9 @@
+.gitignore
 *.secret
 *.yml
 .last_tweet_id
 *.swp
 Config/*
 .last_replyed_id
+!Config
 err.log
