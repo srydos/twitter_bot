@@ -131,10 +131,10 @@ p item
       tweet_id = tweet_entity.id
   end
   #YAMLに吐き出す機能？
-  def tweet_print_yaml(timeline_hash, export_dir="./")
+  def tweet_print_yaml(timeline_hash, export_file_path)
     timeline_hash.each do |tweet|
       #タイムラインを表示
-      open(export_dir + "popular_tweet.yml","a+") do |e|
+      open(export_file_path,"a+") do |e|
         YAML.dump( timeline_hash, e )
       end
     end
