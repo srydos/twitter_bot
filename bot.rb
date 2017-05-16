@@ -2,8 +2,6 @@
 WORK_DIR=File.expand_path(__FILE__).sub(/[^\/]+$/,'')
 require WORK_DIR + 'Class/TetesolTwitter.rb'
 require WORK_DIR + 'Class/TetesolStreaming.rb'
-#require WORK_DIR + 'reply.rb'
-#require WORK_DIR + 'get_tl.rb'
 rest_client   = TetesolTwitter.new(WORK_DIR + 'Config/unko_client.yml')
 stream_client = TetesolStreaming.new(WORK_DIR + 'Config/stream.yml')
 last_reply_id = "1"
@@ -12,13 +10,16 @@ last_reply_id = "1"
 args = ARGV
 func_name = ""
 func_name = "debug_mode" if args.delete("-d") or args.delete("-debug")
+puts "#{func_name} mode"
 
 #最後に反応したtweet_idを取得
 last_reply_id = rest_client.read_or_make_text_file(WORK_DIR + "Config/.last_reply_id")
 
 #反応する条件を読み込み
 @condition = YAML.load_file('Config/reaction_condition.yml')
-@condition['reaction']
+pp @condition
+
+exit
 
 #mention取得
 monitored_tl = rest_client.mentions_timeline_bot(last_reply_id)
