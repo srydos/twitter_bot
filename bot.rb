@@ -2,7 +2,7 @@
 WORK_DIR=File.expand_path(__FILE__).sub(/[^\/]+$/,'')
 require WORK_DIR + 'Class/TetesolTwitter.rb'
 require WORK_DIR + 'Class/TetesolStreaming.rb'
-rest_client   = TetesolTwitter.new(WORK_DIR + 'Config/unko_client.yml')
+rest_client   = TetesolTwitter.new(WORK_DIR + 'Config/unko.yml')
 stream_client = TetesolStreaming.new(WORK_DIR + 'Config/stream.yml')
 last_reply_id = "1"
 
@@ -16,7 +16,7 @@ puts "#{func_name} mode"
 last_reply_id = rest_client.read_or_make_text_file(WORK_DIR + "Config/.last_reply_id")
 
 #反応する条件を読み込み
-@condition = YAML.load_file('Config/reaction_condition.yml')
+@condition = YAML.load_file('Config/reaction-condition.yml')
 pp @condition
 
 exit
