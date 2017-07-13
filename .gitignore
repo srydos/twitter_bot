@@ -7,3 +7,5 @@ Config/*
 .last_replyed_id
 !Config
 err.log
+/.bundle/
+/vendor/bundle
