@@ -1,0 +1,19 @@
+{
+  "summary": {
+    "title": "ee",
+    "owner": "aa",
+    "description": "ssdf"
+  },
+  "detail": {
+    "contributors": [],
+    "diagrams": [
+      {
+        "title": "aaa",
+        "thumbnail": "./public/content/images/thumbnail.stride.jpg",
+        "diagramType": "STRIDE",
+        "id": 0
+      }
+    ],
+    "reviewer": "ff"
+  }
+}
