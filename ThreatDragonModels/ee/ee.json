@@ -11,7 +11,210 @@
         "title": "aaa",
         "thumbnail": "./public/content/images/thumbnail.stride.jpg",
         "diagramType": "STRIDE",
-        "id": 0
+        "id": 0,
+        "diagramJson": {
+          "cells": [
+            {
+              "type": "tm.Process",
+              "size": {
+                "width": 100,
+                "height": 100
+              },
+              "position": {
+                "x": 250,
+                "y": 90
+              },
+              "angle": 0,
+              "id": "668b9f72-8dbc-438f-bad0-2dbedf95379f",
+              "z": 1,
+              "hasOpenThreats": false,
+              "privilegeLevel": "asdf",
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "process 0"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Actor",
+              "size": {
+                "width": 160,
+                "height": 80
+              },
+              "position": {
+                "x": 320,
+                "y": 280
+              },
+              "angle": 0,
+              "id": "13a42f65-4be4-457e-a5a8-2e9ff99adf62",
+              "z": 2,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "actor 1"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "size": {
+                "width": 10,
+                "height": 10
+              },
+              "smooth": true,
+              "source": {
+                "id": "13a42f65-4be4-457e-a5a8-2e9ff99adf62"
+              },
+              "target": {
+                "id": "49bc047d-c129-405c-a328-843022177a7a"
+              },
+              "vertices": [
+                {
+                  "x": 660,
+                  "y": 280
+                }
+              ],
+              "id": "b65e4ec7-2395-4c12-9893-98f99935515d",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "flow 2",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 3,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "size": {
+                "width": 10,
+                "height": 10
+              },
+              "smooth": true,
+              "source": {
+                "id": "668b9f72-8dbc-438f-bad0-2dbedf95379f"
+              },
+              "target": {
+                "id": "13a42f65-4be4-457e-a5a8-2e9ff99adf62"
+              },
+              "vertices": [],
+              "id": "f35b1f92-4398-4eda-b501-7b4c1db333cb",
+              "labels": [
+                {
+                  "position": {
+                    "distance": 0.6720530074206251,
+                    "offset": -35.33089545806101
+                  },
+                  "attrs": {
+                    "text": {
+                      "text": "flow 3",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 4,
+              "hasOpenThreats": true,
+              "threats": [
+                {
+                  "ruleId": "4adaa48a-0345-4533-a189-64c98c4420dd",
+                  "title": "Generic tampering threat",
+                  "type": "Tampering",
+                  "modelType": "STRIDE",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "description": "A generic tampering threat",
+                  "threatId": "b00c49a5-ce70-403c-a241-146dcaa65ad6"
+                },
+                {
+                  "ruleId": "13000296-b17d-4b72-9cc4-f5cc33f80e4c",
+                  "title": "Generic information disclosure threat",
+                  "type": "Information disclosure",
+                  "modelType": "STRIDE",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "description": "A generic information disclosure threat",
+                  "threatId": "8b443577-4e96-4d77-9f8d-f542e3747563"
+                },
+                {
+                  "ruleId": "edb05d76-a695-455f-947b-7d67b78bc31d",
+                  "title": "Generic DoS threat",
+                  "type": "Denial of service",
+                  "modelType": "STRIDE",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "description": "A generic DoS threat",
+                  "threatId": "a143e6f0-0322-4de3-9721-151f676a3107"
+                }
+              ],
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Store",
+              "size": {
+                "width": 160,
+                "height": 80
+              },
+              "position": {
+                "x": 710,
+                "y": 220
+              },
+              "angle": 0,
+              "id": "49bc047d-c129-405c-a328-843022177a7a",
+              "z": 5,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "store 4"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            }
+          ]
+        },
+        "size": {
+          "height": 590,
+          "width": 870
+        }
       }
     ],
     "reviewer": "ff"
